@@ -8,9 +8,9 @@ public class Movement : MonoBehaviour
 	private Rigidbody2D rb;
 
 	private bool canFlip;
-	private float xCord;
 	public float speed = 10.0f;
     public float jumpForce = 5f;
+
     void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -18,21 +18,15 @@ public class Movement : MonoBehaviour
 
 	void Update()
 	{
-		moveVector.x = Input.GetAxisRaw("Horizontal");
-		//moveVector.y = Input.GetAxis("Vertical");
+		moveVector.x = Input.GetAxis("Horizontal");
 		Jump();
 		if (moveVector.x > 0 && canFlip)
 			Flip();
 		if (moveVector.x < 0 && !canFlip)
 			Flip();
-        rb.MovePosition(rb.position + moveVector * speed * Time.deltaTime);
+        rb.velocity = new Vector2(moveVector.x * speed, rb.velocity.y);
     }
 
-	private void FixedUpdate()
-	{
-		
-	}
-	
 	void Flip()
 	{
 		canFlip = !canFlip;
@@ -42,6 +36,6 @@ public class Movement : MonoBehaviour
 	void Jump()
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
-			rb.velocity = new Vector2(transform.position.x, jumpForce);
+			rb.AddForce(Vector2.up * jumpForce);
 	}
 }
