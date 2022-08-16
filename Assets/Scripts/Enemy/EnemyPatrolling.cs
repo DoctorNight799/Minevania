@@ -14,7 +14,7 @@ public class EnemyPatrolling : MonoBehaviour
     [Header("Movement parameters")]
     [SerializeField] private float speed;
     private Vector3 initScale;
-    private bool movingLeft;
+    private bool movingLeft, canFlip;
 
     private void Awake()
     {
@@ -25,15 +25,23 @@ public class EnemyPatrolling : MonoBehaviour
     {
         if (movingLeft)
         {
-            if(enemy.position.x >= leftEdge.position.x)
+            if (enemy.position.x >= leftEdge.position.x)
+            {
                 MoveInDirection(-1);
+                if (!canFlip)
+                    Flip();
+            }
             else
                 DirectionChange();
         }
         else
         {
-            if(enemy.position.x <= rightEdge.position.x)
+            if (enemy.position.x <= rightEdge.position.x)
+            {
                 MoveInDirection(1);
+                if (canFlip)
+                    Flip();
+            }
             else
                 DirectionChange();
         }
@@ -49,5 +57,11 @@ public class EnemyPatrolling : MonoBehaviour
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * _direction, initScale.y, initScale.z);
 
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);
+    }
+
+    void Flip()
+    {
+        canFlip = !canFlip;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
