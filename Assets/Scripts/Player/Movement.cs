@@ -8,12 +8,12 @@ public class Movement : MonoBehaviour
 	private Rigidbody2D rb;
     Vector2 moveVector;
 
-    public float speed, jumpForce, time_jump, check_radius; 
+    public float speed, jumpForce, timeJump, checkRadius; 
 	public LayerMask ground;
-	public bool is_ground;
+	public bool isGround;
 
-    private bool canFlip, is_jumping;
-    private float time_jump_true;
+    private bool canFlip, isJumping;
+    private float timeJumpTrue;
 
     void Start()
 	{
@@ -47,27 +47,27 @@ public class Movement : MonoBehaviour
 
 	void Jump()
 	{
-		is_ground = Physics2D.OverlapCircle(GroundCheck.position, check_radius, ground);
+		isGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, ground);
 
-		if (Input.GetKeyDown(KeyCode.Space) && is_ground)
+		if (Input.GetKeyDown(KeyCode.Space) && isGround)
 		{
-			is_jumping = true;
-			time_jump_true = time_jump;
+			isJumping = true;
+			timeJumpTrue = timeJump;
 			rb.velocity = Vector2.up * jumpForce;
 		}
-		if (Input.GetKey(KeyCode.Space) && is_jumping)
+		if (Input.GetKey(KeyCode.Space) && isJumping)
 		{
-			if (time_jump_true >= 0)
+			if (timeJumpTrue >= 0)
 			{
 				rb.velocity = Vector2.up * jumpForce;
-				time_jump_true -= Time.deltaTime;
+				timeJumpTrue -= Time.deltaTime;
 			}
 			else
-				is_jumping = false;
+				isJumping = false;
 		}
 		if (Input.GetKeyUp(KeyCode.Space))
 		{
-			is_jumping = false;
+			isJumping = false;
 		}
     }
 }

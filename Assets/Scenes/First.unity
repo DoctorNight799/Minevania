@@ -157,13 +157,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundCheck: {fileID: 94459666}
   speed: 10
-  jumpForce: 6
-  time_jump: 0.2
-  check_radius: 0.1
+  jumpForce: 4
+  timeJump: 0.4
+  checkRadius: 0.1
   ground:
     serializedVersion: 2
-    m_Bits: 2147483647
-  is_ground: 0
+    m_Bits: 64
+  isGround: 0
 --- !u!212 &78379435
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ GameObject:
   - component: {fileID: 1717858630}
   - component: {fileID: 1717858629}
   - component: {fileID: 1717858631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
