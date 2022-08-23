@@ -5,11 +5,18 @@ using UnityEngine;
 public class PlatfromEnemy : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private GameObject[] points;
+    public Transform platform; 
 
-    int nextPoint = 1;
+    int nextPoint = 0;
     float distToPoint;
+
+    Rigidbody2D rb;
     
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
         Move();
@@ -17,11 +24,12 @@ public class PlatfromEnemy : MonoBehaviour
 
     void Move()
     {
-        distToPoint = Vector2.Distance(transform.position, points[nextPoint].transform.position);
+        distToPoint = Vector2.Distance(transform.position, points(nextPoint));
 
-        transform.position = Vector2.MoveTowards(transform.position, points[nextPoint].transform.position, moveSpeed * Time.deltaTime);
+        Vector2 movement = Vector2.MoveTowards(transform.position, points(nextPoint), moveSpeed * Time.deltaTime);
+        rb.MovePosition(movement);
 
-        if (distToPoint < 0.2f)
+        if (distToPoint <= 0)
         {
             TakeTurn();
         }
@@ -29,9 +37,7 @@ public class PlatfromEnemy : MonoBehaviour
 
     void TakeTurn()
     {
-        Vector3 currRot = transform.eulerAngles;
-        currRot.z += points[nextPoint].transform.position.z;
-        transform.eulerAngles = currRot;
+        transform.Rotate(0,0,-90);
         ChooseNextPoint();
     }
 
@@ -39,10 +45,31 @@ public class PlatfromEnemy : MonoBehaviour
     {
         nextPoint++;
 
-        if(nextPoint == points.Length)
+        if(nextPoint == 4)
         {
             nextPoint = 0;
         }
+    }
+
+    Vector2 points(int num_point)
+    {
+        Vector2 point;
+        switch(num_point){
+            case 0:
+                point = new Vector2(platform.position.x + platform.lossyScale.x / 2, platform.position.y + platform.lossyScale.y / 2);
+                return point;
+            case 1:
+                point = new Vector2(platform.position.x + platform.lossyScale.x / 2, platform.position.y - platform.lossyScale.y / 2);
+                return point;
+            case 2:
+                point = new Vector2(platform.position.x - platform.lossyScale.x / 2, platform.position.y - platform.lossyScale.y / 2);
+                return point;
+            case 3:
+                point = new Vector2(platform.position.x - platform.lossyScale.x / 2, platform.position.y + platform.lossyScale.y / 2);
+                return point;
+        }
+        Vector2 fake_point = new Vector2(0,0);
+        return fake_point;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
