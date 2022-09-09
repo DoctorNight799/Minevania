@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
 	public Transform GroundCheck;
 	private Rigidbody2D rb;
+	private Animator animator;
     Vector2 moveVector;
 
     public float speed, jumpForce, timeJump, checkRadius; 
@@ -18,10 +19,12 @@ public class Movement : MonoBehaviour
     void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 	}
-
+	
 	void Update()
 	{
+		Anim();
         Jump();
 		if (moveVector.x > 0 && canFlip || moveVector.x < 0 && !canFlip)
 			Flip();
@@ -29,12 +32,14 @@ public class Movement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-        //Иначе он когда только начинает прыгать останавливается и только когда на половине прыжка начинает двигаться
         Walk();
     }
 
-	void Flip()
-	{
+	void Anim(){
+		animator.SetFloat("Walk?", Mathf.Abs(moveVector.x));
+	}
+
+	void Flip(){
 		canFlip = !canFlip;
 		transform.Rotate(0f, 180f, 0f);
 	}
@@ -47,7 +52,8 @@ public class Movement : MonoBehaviour
 
 	void Jump()
 	{
-		isGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, ground);
+		//isGround = Physics2D.OverlapCircle(GroundCheck.position, checkRadius, ground);
+		isGround = Physics2D.OverlapBox(GroundCheck.position, GroundCheck.localScale, 0, ground);
 
 		if (Input.GetKeyDown(KeyCode.Space) && isGround)
 		{
