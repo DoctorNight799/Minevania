@@ -37,6 +37,8 @@ public class Movement : MonoBehaviour
 
 	void Anim(){
 		animator.SetFloat("Walk?", Mathf.Abs(moveVector.x));
+		animator.SetBool("Jump?", isJumping);
+		animator.SetBool("Fall?", !isGround);
 	}
 
 	void Flip(){

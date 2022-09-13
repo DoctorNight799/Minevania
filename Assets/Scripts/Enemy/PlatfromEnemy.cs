@@ -17,7 +17,7 @@ public class PlatfromEnemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
@@ -28,8 +28,9 @@ public class PlatfromEnemy : MonoBehaviour
 
         Vector2 movement = Vector2.MoveTowards(transform.position, points(nextPoint), moveSpeed * Time.deltaTime);
         rb.MovePosition(movement);
+        Debug.DrawLine(transform.position, points(nextPoint));
 
-        if (distToPoint <= 0)
+        if (distToPoint <= 0.01f)
         {
             TakeTurn();
         }
@@ -56,16 +57,16 @@ public class PlatfromEnemy : MonoBehaviour
         Vector2 point;
         switch(num_point){
             case 0:
-                point = new Vector2(platform.position.x + platform.lossyScale.x / 2, platform.position.y + platform.lossyScale.y / 2);
+                point = new Vector2(platform.position.x + platform.lossyScale.x / 2 + 0.76f, platform.position.y + platform.lossyScale.y / 2 + 0.76f);
                 return point;
             case 1:
-                point = new Vector2(platform.position.x + platform.lossyScale.x / 2, platform.position.y - platform.lossyScale.y / 2);
+                point = new Vector2(platform.position.x + platform.lossyScale.x / 2 + 0.76f, platform.position.y - platform.lossyScale.y / 2 - 0.76f);
                 return point;
             case 2:
-                point = new Vector2(platform.position.x - platform.lossyScale.x / 2, platform.position.y - platform.lossyScale.y / 2);
+                point = new Vector2(platform.position.x - platform.lossyScale.x / 2 - 0.76f, platform.position.y - platform.lossyScale.y / 2 - 0.76f);
                 return point;
             case 3:
-                point = new Vector2(platform.position.x - platform.lossyScale.x / 2, platform.position.y + platform.lossyScale.y / 2);
+                point = new Vector2(platform.position.x - platform.lossyScale.x / 2 - 0.76f, platform.position.y + platform.lossyScale.y / 2 + 0.76f);
                 return point;
         }
         Vector2 fake_point = new Vector2(0,0);
