@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlatfromEnemy : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
     public Transform platform; 
+    private EnemyStats stats;
 
     int nextPoint = 0;
     float distToPoint;
-
     Rigidbody2D rb;
     
     void Start()
     {
+        stats = GetComponent<EnemyStats>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -26,7 +27,7 @@ public class PlatfromEnemy : MonoBehaviour
     {
         distToPoint = Vector2.Distance(transform.position, points(nextPoint));
 
-        Vector2 movement = Vector2.MoveTowards(transform.position, points(nextPoint), moveSpeed * Time.deltaTime);
+        Vector2 movement = Vector2.MoveTowards(transform.position, points(nextPoint), stats.speed * Time.deltaTime);
         rb.MovePosition(movement);
         Debug.DrawLine(transform.position, points(nextPoint));
 

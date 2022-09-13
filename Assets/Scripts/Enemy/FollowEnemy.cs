@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class FollowEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private float distance;
-    [SerializeField] private float speed;
     private Transform playerPos;
     private Vector2 currentPos;
+    private EnemyStats stats;
     void Start()
     {
+        stats = GetComponent<EnemyStats>();
         playerPos = player.GetComponent<Transform>();
         currentPos = GetComponent<Transform>().position;
     }
@@ -19,7 +21,7 @@ public class FollowEnemy : MonoBehaviour
     {
         if(Vector2.Distance(transform.position, playerPos.position) < distance)
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, playerPos.position, stats.speed * Time.deltaTime);
             //anim
         }
         else
@@ -30,15 +32,9 @@ public class FollowEnemy : MonoBehaviour
             }
             else
             {
-                transform.position = Vector2.MoveTowards(transform.position, currentPos, speed * Time.deltaTime);
+                transform.position = Vector2.MoveTowards(transform.position, currentPos, stats.speed * Time.deltaTime);
                 //anim
             }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Pickaxe")
-            Destroy(gameObject);
     }
 }

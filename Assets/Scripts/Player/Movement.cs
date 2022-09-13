@@ -8,18 +8,21 @@ public class Movement : MonoBehaviour
 	private Rigidbody2D rb;
 	private Animator animator;
     Vector2 moveVector;
+	private PlayerStats stats;
 
-    public float speed, jumpForce, timeJump, checkRadius; 
+    public float jumpForce, timeJump, checkRadius; 
 	public LayerMask ground;
 	public bool isGround;
 
     private bool canFlip, isJumping;
     private float timeJumpTrue;
 
+
     void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
+		stats = GetComponent<PlayerStats>();
 	}
 	
 	void Update()
@@ -49,7 +52,7 @@ public class Movement : MonoBehaviour
 	void Walk()
 	{
         moveVector.x = Input.GetAxis("Horizontal");
-		rb.velocity = new Vector2(moveVector.x * speed, rb.velocity.y);
+		rb.velocity = new Vector2(moveVector.x * stats.speed, rb.velocity.y);
     }
 
 	void Jump()

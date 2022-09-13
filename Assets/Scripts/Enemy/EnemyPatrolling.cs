@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class EnemyPatrolling : MonoBehaviour
@@ -11,14 +12,19 @@ public class EnemyPatrolling : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private Transform enemy;
 
-    [Header("Movement parameters")]
-    [SerializeField] private float speed;
+    [Header("Movement parameters")];
     private Vector3 initScale;
     private bool movingLeft, canFlip;
+    private EnemyStats stats;
 
     private void Awake()
     {
         initScale = enemy.localScale;
+    }
+
+    private void Start()
+    {
+        stats = GetComponent<EnemyStats>();
     }
 
     private void Update()
@@ -56,7 +62,7 @@ public class EnemyPatrolling : MonoBehaviour
     {
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * _direction, initScale.y, initScale.z);
 
-        enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed, enemy.position.y, enemy.position.z);
+        enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * stats.speed, enemy.position.y, enemy.position.z);
     }
 
     void Flip()

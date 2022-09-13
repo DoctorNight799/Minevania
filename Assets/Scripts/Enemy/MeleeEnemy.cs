@@ -7,12 +7,10 @@ public class MeleeEnemy : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
     [SerializeField] private float colliderDistance;
-    [SerializeField] private int damage;
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private LayerMask playerLayer;
 
     private float cooldownTimer = Mathf.Infinity;
-    private bool canFlip;
 
     private void Update()
     {
@@ -40,11 +38,5 @@ public class MeleeEnemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * range * colliderDistance, new Vector3(boxCollider.bounds.size.x * range, boxCollider.bounds.size.y, boxCollider.bounds.size.z));
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Pickaxe")
-            Destroy(gameObject);
     }
 }
