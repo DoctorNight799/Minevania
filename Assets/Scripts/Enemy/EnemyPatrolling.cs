@@ -12,7 +12,7 @@ public class EnemyPatrolling : MonoBehaviour
     [Header("Enemy")]
     [SerializeField] private Transform enemy;
 
-    [Header("Movement parameters")];
+    [Header("Movement parameters")]
     private Vector3 initScale;
     private bool movingLeft, canFlip;
     private EnemyStats stats;

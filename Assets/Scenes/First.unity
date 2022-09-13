@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 99682913}
   - component: {fileID: 99682912}
   - component: {fileID: 99682911}
+  - component: {fileID: 99682914}
   m_Layer: 0
   m_Name: FollowEnemy
   m_TagString: Untagged
@@ -534,7 +535,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 78379431}
   distance: 10
-  speed: 5
 --- !u!61 &99682912
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -613,6 +613,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &99682914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99682909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dccf280feea47444a09fc84b2dd60e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 5
+  money: 5
+  dmg: 5
+  player: {fileID: 78379431}
 --- !u!1 &154780968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1339,7 @@ GameObject:
   - component: {fileID: 634169455}
   - component: {fileID: 634169456}
   - component: {fileID: 634169459}
+  - component: {fileID: 634169460}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1370,7 +1388,6 @@ MonoBehaviour:
   attackCooldown: 1
   range: 1
   colliderDistance: 1
-  damage: 2
   boxCollider: {fileID: 634169455}
   playerLayer:
     serializedVersion: 2
@@ -1457,7 +1474,23 @@ MonoBehaviour:
   leftEdge: {fileID: 1576385712}
   rightEdge: {fileID: 77191292}
   enemy: {fileID: 634169458}
-  speed: 2
+--- !u!114 &634169460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634169454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dccf280feea47444a09fc84b2dd60e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 5
+  money: 5
+  dmg: 25
+  player: {fileID: 78379431}
 --- !u!1 &689776396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,6 +1914,7 @@ GameObject:
   - component: {fileID: 1056288168}
   - component: {fileID: 1056288169}
   - component: {fileID: 1056288170}
+  - component: {fileID: 1056288171}
   m_Layer: 0
   m_Name: PlatformEnemy
   m_TagString: Enemy
@@ -1967,7 +2001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c80d87ef811c5c4fb733a9a35e70dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
   platform: {fileID: 777044163}
 --- !u!61 &1056288169
 BoxCollider2D:
@@ -2016,6 +2049,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1056288171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056288164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dccf280feea47444a09fc84b2dd60e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 5
+  money: 5
+  dmg: 25
+  player: {fileID: 78379431}
 --- !u!1 &1300547815
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2473,7 @@ GameObject:
   - component: {fileID: 2018611475}
   - component: {fileID: 2018611479}
   - component: {fileID: 2018611478}
+  - component: {fileID: 2018611480}
   m_Layer: 0
   m_Name: FlyingEnemy
   m_TagString: Untagged
@@ -2530,7 +2581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d1ba1212d3ab7458686f517b4c52bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13
   timer_y: 1
   timer_for_attack: 2
   flop_x: 4
@@ -2562,6 +2612,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2018611480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018611474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dccf280feea47444a09fc84b2dd60e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  speed: 5
+  money: 10
+  dmg: 1
+  player: {fileID: 78379431}
 --- !u!1001 &2072125587627614940
 PrefabInstance:
   m_ObjectHideFlags: 0
